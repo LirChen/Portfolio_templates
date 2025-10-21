@@ -330,50 +330,6 @@ portfolio-templates/
     └── cloud_4.png
 ```
 
-## 📸 Screenshots Guide
-
-When taking screenshots for your own projects or contributing:
-
-### What to Capture (4 images per template):
-1. **Image 1: Hero Section** - Landing/welcome screen with main heading
-2. **Image 2: About Section** - About me section with text content
-3. **Image 3: Skills Section** - Skills cards or categories display
-4. **Image 4: Projects Section** - Project showcase cards
-
-### Technical Specifications:
-- **Resolution**: 1920x1080 or higher
-- **Format**: PNG for best quality
-- **File Size**: Compress to under 500KB per image (use TinyPNG)
-- **Naming**: Follow the pattern `templatename_1.png`, `templatename_2.png`, etc.
-
-### How to Take Screenshots:
-
-**Method 1: Browser DevTools (Recommended)**
-```bash
-1. Open the template in Chrome/Edge
-2. Press F12 to open DevTools
-3. Click Toggle Device Toolbar (Ctrl+Shift+M)
-4. Set resolution to 1920x1080
-5. Press Ctrl+Shift+P
-6. Type "Capture full size screenshot"
-7. Save to /images folder
-```
-
-**Method 2: Browser Extensions**
-- [GoFullPage](https://chrome.google.com/webstore) - Full page screenshots
-- [Awesome Screenshot](https://www.awesomescreenshot.com/)
-
-**Method 3: Online Tools**
-- [Screenshot.guru](https://screenshot.guru) - Enter URL, get screenshot
-- [Web-Capture.net](https://web-capture.net)
-
-### Tips for Best Results:
-- ✅ Capture in light mode AND dark mode if template supports it
-- ✅ Show hover effects if possible
-- ✅ Ensure all text is readable
-- ✅ Remove any personal/test data
-- ✅ Center important content in frame
-
 ## 📝 Creating Project Detail Pages
 
 Each template links to separate project pages (`project1.html`, `project2.html`, etc.). Create these files with similar styling:
