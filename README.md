@@ -4,8 +4,6 @@ A curated collection of 7 stunning, production-ready portfolio templates designe
 
 > **💡 Important Note:** These are starter templates! All colors, fonts, spacing, and styles are **fully customizable**. The designs shown are examples - feel free to adjust everything to match your personal brand and preferences.
 
-![Portfolio Templates Banner](./images/banner.png)
-
 ## ✨ Features
 
 - 🚀 **Zero Dependencies** - Single HTML file per template
