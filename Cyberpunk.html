@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio - Cyberpunk</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', 'Courier New', monospace;
+            background: #0a0e27;
+            color: #00ff41;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated Grid Background */
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 0;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+            100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
+        }
+
+        /* Neon Lines */
+        .neon-line {
+            position: fixed;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ff00ff, transparent);
+            box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+            z-index: 0;
+        }
+
+        .neon-line:nth-child(1) {
+            top: 20%;
+            left: 0;
+            width: 60%;
+            animation: lineGlow 3s ease-in-out infinite;
+        }
+
+        .neon-line:nth-child(2) {
+            top: 60%;
+            right: 0;
+            width: 70%;
+            animation: lineGlow 3s ease-in-out infinite 1.5s;
+        }
+
+        @keyframes lineGlow {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 14, 39, 0.9);
+            border-bottom: 2px solid #00ffff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            padding: 1.5rem 5%;
+            z-index: 1000;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+        }
+
+        nav a {
+            color: #00ffff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        nav a:hover {
+            color: #ff00ff;
+            text-shadow: 0 0 20px rgba(255, 0, 255, 1);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 5%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .glitch {
+            font-size: 6rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            position: relative;
+            color: #00ffff;
+            letter-spacing: 5px;
+            text-shadow: 
+                0 0 10px #00ffff,
+                0 0 20px #00ffff,
+                0 0 30px #00ffff,
+                0 0 40px #ff00ff;
+            animation: glitch 1s infinite;
+        }
+
+        @keyframes glitch {
+            0%, 100% { 
+                text-shadow: 
+                    0 0 10px #00ffff,
+                    0 0 20px #00ffff,
+                    0 0 30px #00ffff,
+                    0 0 40px #ff00ff;
+            }
+            25% { 
+                text-shadow: 
+                    -2px 0 #ff00ff,
+                    2px 2px #00ffff;
+            }
+            75% { 
+                text-shadow: 
+                    2px 0 #00ffff,
+                    -2px -2px #ff00ff;
+            }
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin: 2rem 0 3rem;
+            color: #ffff00;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px #ffff00;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .neon-btn {
+            padding: 1.2rem 3rem;
+            background: transparent;
+            color: #00ffff;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 2px solid #00ffff;
+            box-shadow: 
+                0 0 10px #00ffff,
+                inset 0 0 10px #00ffff;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .neon-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 255, 255, 0.2);
+            transition: left 0.3s;
+        }
+
+        .neon-btn:hover::before {
+            left: 0;
+        }
+
+        .neon-btn:hover {
+            box-shadow: 
+                0 0 20px #00ffff,
+                inset 0 0 20px #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+        }
+
+        .neon-btn-alt {
+            color: #ff00ff;
+            border-color: #ff00ff;
+            box-shadow: 
+                0 0 10px #ff00ff,
+                inset 0 0 10px #ff00ff;
+        }
+
+        .neon-btn-alt::before {
+            background: rgba(255, 0, 255, 0.2);
+        }
+
+        .neon-btn-alt:hover {
+            box-shadow: 
+                0 0 20px #ff00ff,
+                inset 0 0 20px #ff00ff;
+            text-shadow: 0 0 10px #ff00ff;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 120px 5%;
+            min-height: 100vh;
+            position: relative;
+            z-index: 1;
+        }
+
+        h2 {
+            font-size: 4rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: #00ffff;
+            letter-spacing: 5px;
+            text-shadow: 
+                0 0 10px #00ffff,
+                0 0 20px #00ffff;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #ffff00;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 5rem;
+            text-shadow: 0 0 10px #ffff00;
+        }
+
+        /* About Section */
+        .about-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(0, 255, 255, 0.02);
+            padding: 3rem;
+            border: 2px solid #00ffff;
+            box-shadow: 
+                0 0 20px rgba(0, 255, 255, 0.3),
+                inset 0 0 20px rgba(0, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .about-content::before,
+        .about-content::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ff00ff;
+        }
+
+        .about-content::before {
+            top: -2px;
+            left: -2px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .about-content::after {
+            bottom: -2px;
+            right: -2px;
+            border-left: none;
+            border-top: none;
+        }
+
+        .about-content p {
+            font-size: 1.2rem;
+            line-height: 1.9;
+            margin-bottom: 1.5rem;
+            color: #00ff41;
+            text-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .skill-card {
+            background: rgba(255, 0, 255, 0.02);
+            padding: 2.5rem;
+            border: 2px solid #ff00ff;
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(255, 0, 255, 0.1),
+                transparent
+            );
+            transform: rotate(45deg);
+            transition: all 0.5s;
+        }
+
+        .skill-card:hover::before {
+            top: -100%;
+            left: -100%;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 40px rgba(255, 0, 255, 0.6);
+            border-color: #00ffff;
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            display: block;
+            filter: drop-shadow(0 0 10px #ff00ff);
+        }
+
+        .skill-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #ff00ff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px #ff00ff;
+        }
+
+        .skill-card p {
+            color: #00ff41;
+            line-height: 1.7;
+            text-shadow: 0 0 5px rgba(0, 255, 65, 0.3);
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background: rgba(0, 255, 255, 0.02);
+            border: 2px solid #00ffff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            overflow: hidden;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .project-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 0, 255, 0.2),
+                transparent
+            );
+            transition: left 0.5s;
+        }
+
+        .project-card:hover::after {
+            left: 100%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.6);
+            border-color: #ff00ff;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 280px;
+            background: rgba(255, 0, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            border-bottom: 2px solid #ff00ff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(0, 0, 0, 0.2) 0px,
+                    transparent 2px,
+                    transparent 4px,
+                    rgba(0, 0, 0, 0.2) 4px
+                );
+            animation: scanlines 10s linear infinite;
+        }
+
+        @keyframes scanlines {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(10px); }
+        }
+
+        .project-content {
+            padding: 2.5rem;
+        }
+
+        .project-content h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #00ffff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px #00ffff;
+        }
+
+        .project-content p {
+            color: #00ff41;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+            text-shadow: 0 0 5px rgba(0, 255, 65, 0.3);
+        }
+
+        .project-link {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: transparent;
+            color: #ffff00;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 2px solid #ffff00;
+            box-shadow: 0 0 10px #ffff00;
+            transition: all 0.3s;
+        }
+
+        .project-link:hover {
+            box-shadow: 0 0 20px #ffff00;
+            transform: translateX(10px);
+            text-shadow: 0 0 10px #ffff00;
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 5%;
+            text-align: center;
+            border-top: 2px solid #00ffff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        footer p {
+            color: #00ffff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px #00ffff;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .glitch {
+                font-size: 3rem;
+            }
+
+            h2 {
+                font-size: 2.5rem;
+            }
+
+            section {
+                padding: 80px 5%;
+            }
+
+            nav ul {
+                gap: 1.5rem;
+            }
+
+            nav a {
+                font-size: 0.9rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Grid Background -->
+    <div class="grid-bg"></div>
+    <div class="neon-line"></div>
+    <div class="neon-line"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1 class="glitch">YOUR NAME</h1>
+        <p>Your Professional Title</p>
+        <div class="hero-buttons">
+            <a href="#projects" class="neon-btn">View Projects</a>
+            <a href="#about" class="neon-btn neon-btn-alt">About Me</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>About</h2>
+        <p class="section-subtitle">// Who I Am</p>
+        <div class="about-content">
+            <p>
+                Write your introduction here. Talk about your background, what drives you, 
+                and what makes you passionate about your work.
+            </p>
+            <p>
+                Share your journey, experiences, and the skills you've developed along the way. 
+                This is your opportunity to connect with visitors on a personal level.
+            </p>
+            <p>
+                Mention your current focus, goals, and what excites you about the future 
+                of your field.
+            </p>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2>Skills</h2>
+        <p class="section-subtitle">// Technical Arsenal</p>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <span class="skill-icon">💻</span>
+                <h3>Category 1</h3>
+                <p>Describe your expertise in this area. List relevant technologies, tools, or methodologies you use.</p>
+            </div>
+            <div class="skill-card">
+                <span class="skill-icon">🎨</span>
+                <h3>Category 2</h3>
+                <p>Describe your expertise in this area. List relevant technologies, tools, or methodologies you use.</p>
+            </div>
+            <div class="skill-card">
+                <span class="skill-icon">📱</span>
+                <h3>Category 3</h3>
+                <p>Describe your expertise in this area. List relevant technologies, tools, or methodologies you use.</p>
+            </div>
+            <div class="skill-card">
+                <span class="skill-icon">⚡</span>
+                <h3>Category 4</h3>
+                <p>Describe your expertise in this area. List relevant technologies, tools, or methodologies you use.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2>Projects</h2>
+        <p class="section-subtitle">// Latest Work</p>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-image">🚀</div>
+                <div class="project-content">
+                    <h3>Project 1</h3>
+                    <p>Brief description of what this project does, the problem it solves, and the technologies used to build it.</p>
+                    <a href="project1.html" class="project-link">View Details →</a>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-image">💡</div>
+                <div class="project-content">
+                    <h3>Project 2</h3>
+                    <p>Brief description of what this project does, the problem it solves, and the technologies used to build it.</p>
+                    <a href="project2.html" class="project-link">View Details →</a>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-image">⚡</div>
+                <div class="project-content">
+                    <h3>Project 3</h3>
+                    <p>Brief description of what this project does, the problem it solves, and the technologies used to build it.</p>
+                    <a href="project3.html" class="project-link">View Details →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Your Name // All Rights Reserved</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
